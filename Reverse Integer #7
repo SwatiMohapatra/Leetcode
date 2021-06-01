@@ -1,0 +1,25 @@
+class Solution(object):
+    def reverse(self, n):
+        """
+        :type x: int
+        :rtype: int
+        """
+        list1 = []
+        a=1
+        if n<0:
+            a=-1
+            n=-n
+        while (n>0):
+            r = n%10
+            list1.append(r)
+            n=int(n/10)
+        count = len(list1)
+        sum=0
+        for i in range (count):
+            sum = sum+ list1[-i-1]*10**i
+        sum = sum*a
+        l1 = 2**(31) *(-1)
+        l2 = 2**(31) + 1
+        if (sum<l1 or sum>l2):
+            return 0
+        return sum
