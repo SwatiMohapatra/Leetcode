@@ -1,0 +1,30 @@
+#Method 1... tc=nlogn
+
+def smallerNumbersThanCurrent(self, a):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        b=[]
+        for i in a:
+            b.append(i)
+        
+        a.sort()   #sort the element..tc=nlogn
+        
+        result={}
+        #iterate through sorted a using enumerate
+        
+        for index,i in enumerate(a):
+            
+            '''did this step cz in case of duplicate numbers, ans shouldnt be the index only..it should be same for duplicate members. So, the same pos value should be printed for duplicate values '''
+        
+            if index!=0 and a[index-1]==i:  
+                result[i]=pos 
+            else:
+                pos=index
+                result[i]=pos
+        final=[]
+        for i in b:
+            final.append(result[i])
+        return final
+            
