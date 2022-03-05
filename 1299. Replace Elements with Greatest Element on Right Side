@@ -1,0 +1,10 @@
+def replaceElements(self, arr):
+       
+        n=len(arr)
+        final=[-1] * n    #took -1 as we no matter what, the last value will be -1 only.. 
+        maxi = arr[-1]    
+        for i in range(n-2, -1,-1):
+            if arr[i+1]>maxi:
+                maxi=arr[i+1] #did this so that we can find max till i+1th position from end
+            final[i]=maxi    #then substitute the max value in ith position
+        return final
