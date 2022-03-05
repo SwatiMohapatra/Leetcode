@@ -1,0 +1,32 @@
+# Finding real position by selection sort
+
+ def findUnsortedSubarray(self, a):
+        
+        '''used selection sort to find min, and then i compared it min is  in its correct position or not.
+        if min isnt in its correct place, then  i mark that index and break out of loop, then i start selection sort from end of maatrix to find the last
+        elemtn which is in unsorted. i find max from end of array to first and see if max is at correct postition everytime or not, if not, then i mark that position and return           last-first+1 i.e the lenghth of the unsorted array'''
+        
+        n=len(a)
+        first=-1
+        for i in range(n):
+            mini=min(a[i:n+1])   #find mini from ith position to end cz the elements before i would already have been sorted by selection sort
+            
+            if a[i]==mini:  #it means the min is in its correct position. proceed further
+                pass
+            else:
+                first=i  #it means the min isnt in its correct position, hence sorting required. thus mark this position
+                break
+        if first==-1: 
+            return 0  
+        
+        '''needed this case cz if arrray is already sorted then ther is no need of finding last positon as the above for looop would have reached till the end of array and first wouldnt have changed and also i would have been n now...'''
+        
+            
+        else:
+            for i in range(n-1,first-1,-1):
+                maxi = max(a[first:i+1])
+                if a[i]==maxi:
+                    pass
+                else:
+                    last=i
+                    return last-first+1
