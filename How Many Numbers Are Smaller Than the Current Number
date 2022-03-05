@@ -1,0 +1,23 @@
+#Method 2 - tc=n, sc=n
+
+a=[7,7,7,7]
+
+maxi = max(a)   #so that i can create a array of size max
+
+new = [0] * (maxi+1) #did max+1 cz list in python start from 0. and we need to go till max index. thus max+1
+
+for i in a:
+    new[i]+=1    #adding number of count of the element occured
+
+dic={}
+count=0
+for index,i in enumerate(new):
+    if i!=0:
+        dic[index]=count   #adding counts of previously recurred elements and then updating the count with current count of element
+        count+=i
+
+
+final=[]
+for i in a:
+    final.append(dic[i])
+print(final)
