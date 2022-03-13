@@ -1,0 +1,118 @@
+class Apartment:
+    
+    def __init__(self,type,corporation,borewell):
+        self.type = type
+        self.corporation_ratio = corporation
+        self.borewell_ratio = borewell
+        self.no_of_guest = 0
+        print(f'type= {self.type} ratio = {self.corporation_ratio} {self.borewell_ratio}')
+
+    #store number of people based on type
+    def no_of_people(self):
+        if self.type ==2:
+            self.no_of_people= 3
+        else:
+            self.no_of_people=5
+    
+    #Count number of guests
+    def no_of_guest(self,guest):
+        self.no_of_guest+=guest
+    
+class WaterAllotment(Apartment):
+    def __init__(self,type, corporation ,borewell):
+        super().__init__(type, corporation ,borewell)
+        self.water_per_person = 10
+        self.usage_without_guest()
+        self.cost_without_guest()
+        if self.no_of_guest>0:
+            self.cost_with_guest()
+    
+    #assign how much water is used in general without guests per month
+    def usage_without_guest(self):
+        if self.type==2:
+            self.usage_without_guest = 900
+        else:
+            self.usage_without_guest = 1500
+    
+    #calculate ratio of water consumption by corporation and borewell
+    def ratiowise_consumption(self):
+        total = self.corporation_ratio + self.borewell_ratio
+        each_part= self.usage_without_guest // total
+        corporation = each_part * self.corporation_ratio
+        borewell = each_part * self.borewell_ratio
+        return (corporation,borewell)
+
+    # calculate cost of water without guest in a month
+    def cost_without_guest(self):
+        price_of_corp = 1
+        price_of_borewell = 1.5
+        corporation , borewell = self.ratiowise_consumption()
+        self.cost_without_guest = (price_of_borewell * borewell) + (price_of_corp * corporation)
+
+    # water used by guest in a month
+    def usage_of_guest(self):
+        water_consumed_by_guest = self.no_of_guest * self.water_per_person * 30
+        return water_consumed_by_guest
+
+    #to find cost of water consumed by guest per month
+    def cost_of_guest(self):
+        water_consumed_by_guest = self.usage_of_guest()
+        if water_consumed_by_guest in range(0,501):
+            price_per_litre = 2
+        elif water_consumed_by_guest in range(501,1501):
+            price_per_litre = 3
+        elif water_consumed_by_guest in range(1501,3001):
+            price_per_litre = 5
+        elif water_consumed_by_guest>3000:
+            price_per_litre = 8
+
+        self.cost_by_guest = price_per_litre * water_consumed_by_guest
+
+# to calculate final values of water used and cost occured per month
+class Bill(WaterAllotment):
+    def output(self):
+        total_cost = self.cost_by_guest + self.cost_without_guest
+        total_water_consumed = self.usage_of_guest() + self.usage_without_guest
+        print(total_water_consumed, total_cost)
+
+
+# corporation,type,borewell = 0,0,0
+i = input()
+while i!='BILL':
+    
+    if i[:11]=='ALLOT_WATER':
+        global type = int(i[12])
+        print(type, "type")
+        global corporation = int(i[14])
+        print(corporation, "corpe")
+        global borewell = int(i[16])
+        print(borewell, "borewell")
+        apt = Apartment(type,corporation,borewell)
+
+
+    elif i[:10]=='ADD_GUESTS':
+        guest=int(i[11])
+        apt.no_of_guest(guest)
+    
+    i=input()  #take input again
+
+w = WaterAllotment(type,corporation,borewell)
+c= Bill()
+
+
+
+
+        
+        
+
+
+        
+        
+        
+        
+  
+  
+
+  
+
+
